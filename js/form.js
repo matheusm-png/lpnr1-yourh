@@ -1,67 +1,74 @@
 /**
  * form.js
- * Validação em tempo real, máscara de telefone BR,
- * integração com RD Station via webhook e disparo de evento GTM
+ * Validação em tempo real, máscara telefone BR,
+ * integração RD Station API de Conversões, Meta Pixel Lead event
  */
 
 (function () {
   'use strict';
 
   // ── CONFIGURAÇÃO ────────────────────────────────────────────────
-  // INSERIR URL DO WEBHOOK RD STATION AQUI
-  var RD_STATION_WEBHOOK_URL = '';
+  // INSERIR URL DO WEBHOOK RD STATION AQUI (API de Conversões)
+  var RD_API_URL = 'https://api.rd.services/platform/conversions?api_key=2b4d5177951b2aaefe0b7f838559c2d9';
+
+  var OBRIGADO_URL = 'obrigado.html';
 
   // ── VALIDADORES ─────────────────────────────────────────────────
-
   var validators = {
     nome: function (v) {
-      return v.trim().length >= 3 && v.trim().includes(' ');
+      return v.trim().length >= 3 && v.trim().split(' ').length >= 2 && v.trim().split(' ')[1].length >= 1;
+    },
+    email: function (v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+    },
+    telefone: function (v) {
+      var d = v.replace(/\D/g, '');
+      return d.length >= 10 && d.length <= 11;
     },
     empresa: function (v) {
       return v.trim().length >= 2;
     },
+    funcionarios: function (v) {
+      return v !== '' && v !== null;
+    },
     cargo: function (v) {
-      return v.trim().length >= 2;
+      return v !== '' && v !== null;
     },
-    email: function (v) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-    },
-    telefone: function (v) {
-      var digits = v.replace(/\D/g, '');
-      return digits.length >= 10 && digits.length <= 11;
+    lgpd: function (v, el) {
+      return el ? el.checked : false;
     },
   };
 
   var errorMessages = {
-    nome:      'Informe seu nome completo (nome e sobrenome).',
-    empresa:   'Informe o nome da empresa.',
-    cargo:     'Informe seu cargo.',
-    email:     'Informe um e-mail corporativo válido.',
-    telefone:  'Informe um telefone válido com DDD.',
+    nome:         'Informe seu nome completo (nome e sobrenome).',
+    email:        'Informe um e-mail válido.',
+    telefone:     'Informe um telefone válido com DDD.',
+    empresa:      'Informe o nome da empresa.',
+    funcionarios: 'Selecione o número de funcionários.',
+    cargo:        'Selecione seu cargo.',
+    lgpd:         'Você precisa aceitar a Política de Privacidade.',
   };
 
   // ── MÁSCARA DE TELEFONE BR ───────────────────────────────────────
-
   function maskPhone(value) {
-    var digits = value.replace(/\D/g, '').slice(0, 11);
-    if (digits.length === 0) return '';
-    if (digits.length <= 2)  return '(' + digits;
-    if (digits.length <= 6)  return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
-    if (digits.length <= 10) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 6) + '-' + digits.slice(6);
-    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+    var d = value.replace(/\D/g, '').slice(0, 11);
+    if (!d.length) return '';
+    if (d.length <= 2)  return '(' + d;
+    if (d.length <= 6)  return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+    if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+    return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
   }
 
-  // ── HELPERS ─────────────────────────────────────────────────────
-
+  // ── HELPERS DE ESTADO ────────────────────────────────────────────
   function setError(groupEl, inputEl, msg) {
     groupEl.classList.add('has-error');
-    inputEl.classList.add('is-error');
     inputEl.classList.remove('is-valid');
+    inputEl.classList.add('is-error');
     var errorEl = groupEl.querySelector('.form-error');
     if (errorEl) errorEl.textContent = msg;
     // Re-trigger shake
     inputEl.classList.remove('is-error');
-    void inputEl.offsetWidth; // reflow
+    void inputEl.offsetWidth;
     inputEl.classList.add('is-error');
   }
 
@@ -76,161 +83,181 @@
     inputEl.classList.remove('is-error', 'is-valid');
   }
 
-  function validateField(name, value, groupEl, inputEl) {
-    if (value.trim() === '') {
-      clearState(groupEl, inputEl);
+  function validateField(name, inputEl) {
+    var groupEl = inputEl.closest('.form-group');
+    if (!groupEl) return true;
+
+    var value = inputEl.value;
+    var isValid;
+
+    if (name === 'lgpd') {
+      isValid = inputEl.checked;
+    } else {
+      isValid = value.trim() !== '' && validators[name] && validators[name](value, inputEl);
+    }
+
+    if (!isValid) {
+      setError(groupEl, inputEl, errorMessages[name] || 'Campo obrigatório.');
       return false;
     }
-    if (validators[name] && !validators[name](value)) {
-      setError(groupEl, inputEl, errorMessages[name] || 'Campo inválido.');
-      return false;
-    }
+
     setValid(groupEl, inputEl);
     return true;
   }
 
-  // ── SUBMISSÃO ───────────────────────────────────────────────────
-
+  // ── LOADING / SUCCESS ────────────────────────────────────────────
   function showLoading(btn) {
     btn.disabled = true;
-    btn.dataset.originalText = btn.innerHTML;
+    btn.dataset.original = btn.innerHTML;
     btn.innerHTML = '<span class="spinner"></span> Enviando...';
   }
 
   function hideLoading(btn) {
     btn.disabled = false;
-    btn.innerHTML = btn.dataset.originalText || 'Quero falar com um especialista';
+    btn.innerHTML = btn.dataset.original || 'quero falar com um especialista!';
   }
 
-  function showSuccess(formEl) {
-    var formContent = formEl.querySelector('.form-fields');
-    var successEl   = formEl.querySelector('.form-success');
-    if (formContent) formContent.style.display = 'none';
-    if (successEl)   successEl.classList.add('is-visible');
-  }
-
+  // ── RD STATION API ───────────────────────────────────────────────
   function sendToRdStation(data) {
-    if (!RD_STATION_WEBHOOK_URL) {
-      return Promise.resolve({ ok: true, simulated: true });
-    }
-    return fetch(RD_STATION_WEBHOOK_URL, {
+    return fetch(RD_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        event_type: 'CONVERSION',
+        event_type:   'CONVERSION',
         event_family: 'CDP',
         payload: {
           conversion_identifier: 'lp-nr1-yourh',
-          name:  data.nome,
-          email: data.email,
-          company_name:   data.empresa,
-          job_title:      data.cargo,
-          mobile_phone:   data.telefone,
-          cf_origin:      'Landing Page NR-1',
-          traffic_source: document.referrer || 'direto',
+          name:                data.nome,
+          email:               data.email,
+          mobile_phone:        data.telefone,
+          company_name:        data.empresa,
+          number_of_employees: data.funcionarios,
+          job_title:           data.cargo,
+          traffic_source:      'Meta Ads',
         },
       }),
     });
   }
 
-  function fireGtmEvent(data) {
+  // ── GTM + META PIXEL ─────────────────────────────────────────────
+  function fireEvents(data) {
     // GTM: evento lead_form_submit disparado aqui
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
-      event:   'lead_form_submit',
-      cargo:   data.cargo,
-      empresa: data.empresa,
+      event:               'lead_form_submit',
+      cargo:               data.cargo,
+      empresa:             data.empresa,
+      numero_funcionarios: data.funcionarios,
     });
+
+    // Meta Pixel: Lead event disparado aqui
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead');
+    }
 
     // Evento customizado para outras integrações
-    var ev = new CustomEvent('lead_form_submit', {
+    window.dispatchEvent(new CustomEvent('lead_form_submit', {
       bubbles: true,
-      detail: {
-        cargo:   data.cargo,
-        empresa: data.empresa,
-        email:   data.email,
-      },
-    });
-    window.dispatchEvent(ev);
+      detail: { email: data.email, cargo: data.cargo, empresa: data.empresa },
+    }));
   }
 
-  // ── INIT ────────────────────────────────────────────────────────
-
+  // ── INIT ─────────────────────────────────────────────────────────
   function init() {
     var form = document.getElementById('conversion-form');
     if (!form) return;
 
-    var fields = form.querySelectorAll('[data-field]');
-
-    // Máscara de telefone em tempo real
+    // Máscara de telefone
     var phoneInput = form.querySelector('[data-field="telefone"]');
     if (phoneInput) {
       phoneInput.addEventListener('input', function () {
-        var cursor = phoneInput.selectionStart;
         var masked = maskPhone(phoneInput.value);
         phoneInput.value = masked;
-        // Reposiciona cursor de forma aproximada
-        try { phoneInput.setSelectionRange(masked.length, masked.length); } catch (e) {}
       });
     }
 
-    // Validação em tempo real no blur
+    // Validação no blur para inputs e selects
+    var fields = form.querySelectorAll('[data-field]');
     fields.forEach(function (input) {
-      var name    = input.dataset.field;
-      var groupEl = input.closest('.form-group');
-      if (!groupEl) return;
+      var name = input.dataset.field;
+      if (name === 'lgpd') return; // checkbox validado no change
 
       input.addEventListener('blur', function () {
-        validateField(name, input.value, groupEl, input);
+        validateField(name, input);
       });
-
-      // Remove erro ao começar a digitar novamente
       input.addEventListener('input', function () {
-        if (groupEl.classList.contains('has-error')) {
+        var groupEl = input.closest('.form-group');
+        if (groupEl && groupEl.classList.contains('has-error')) {
           clearState(groupEl, input);
         }
       });
+      // Select: validar no change também
+      if (input.tagName === 'SELECT') {
+        input.addEventListener('change', function () {
+          validateField(name, input);
+        });
+      }
     });
 
-    // Submissão
+    // Checkbox LGPD
+    var lgpdInput = form.querySelector('[data-field="lgpd"]');
+    if (lgpdInput) {
+      lgpdInput.addEventListener('change', function () {
+        validateField('lgpd', lgpdInput);
+      });
+    }
+
+    // Submit
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var isValid = true;
-      var formData = {};
+      var allValid = true;
+      var firstInvalid = null;
 
       fields.forEach(function (input) {
-        var name    = input.dataset.field;
-        var groupEl = input.closest('.form-group');
-        var valid   = validateField(name, input.value, groupEl, input);
+        var name = input.dataset.field;
+        var valid = validateField(name, input);
         if (!valid) {
-          isValid = false;
-          if (!form.querySelector('.is-error')) {
-            input.focus();
-          }
+          allValid = false;
+          if (!firstInvalid) firstInvalid = input;
         }
-        formData[name] = input.value.trim();
       });
 
-      if (!isValid) return;
+      if (!allValid) {
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      // Coleta dados
+      var data = {
+        nome:         form.querySelector('[data-field="nome"]').value.trim(),
+        email:        form.querySelector('[data-field="email"]').value.trim(),
+        telefone:     form.querySelector('[data-field="telefone"]').value.trim(),
+        empresa:      form.querySelector('[data-field="empresa"]').value.trim(),
+        funcionarios: form.querySelector('[data-field="funcionarios"]').value,
+        cargo:        form.querySelector('[data-field="cargo"]').value,
+      };
 
       var submitBtn = form.querySelector('.form-submit-btn');
       showLoading(submitBtn);
 
-      sendToRdStation(formData)
-        .then(function () {
-          fireGtmEvent(formData);
-          showSuccess(form);
+      sendToRdStation(data)
+        .then(function (res) {
+          if (res.ok || res.status === 200 || res.status === 201) {
+            fireEvents(data);
+            window.location.href = OBRIGADO_URL;
+          } else {
+            throw new Error('Status ' + res.status);
+          }
         })
         .catch(function (err) {
-          console.error('[YouRH Form] Erro ao enviar:', err);
-          // Mesmo com erro de rede, dispara o evento GTM e mostra sucesso
-          // para não prejudicar a experiência do lead
-          fireGtmEvent(formData);
-          showSuccess(form);
-        })
-        .finally(function () {
+          console.error('[YouRH Form] Erro RD Station:', err);
           hideLoading(submitBtn);
+          var errorEl = form.querySelector('.form-send-error');
+          if (errorEl) {
+            errorEl.textContent = 'Erro ao enviar. Tente novamente.';
+            errorEl.style.display = 'block';
+          }
         });
     });
   }

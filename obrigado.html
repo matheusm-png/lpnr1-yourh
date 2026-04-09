@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Obrigado! | YouRH</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/main.css" />
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1271719717083226');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1271719717083226&ev=Lead&noscript=1"/>
+  </noscript>
+  <!-- Fim Meta Pixel -->
+
+  <style>
+    .obrigado-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .obrigado-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-16) var(--space-5);
+      background: var(--color-cream);
+    }
+
+    .obrigado-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-12) var(--space-8);
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-5);
+    }
+
+    @media (min-width: 768px) {
+      .obrigado-card {
+        padding: var(--space-16) var(--space-12);
+      }
+    }
+
+    .obrigado-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--color-green-light);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-green);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .obrigado-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-green-light);
+      color: var(--color-green-dark);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semibold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+    }
+
+    .obrigado-title {
+      font-family: var(--font-headline);
+      font-size: var(--text-3xl);
+      font-weight: var(--weight-extrabold);
+      color: var(--color-purple);
+      line-height: var(--leading-tight);
+    }
+
+    @media (min-width: 768px) {
+      .obrigado-title {
+        font-size: var(--text-4xl);
+      }
+    }
+
+    .obrigado-desc {
+      font-size: var(--text-md);
+      color: var(--color-text-muted);
+      line-height: var(--leading-normal);
+      max-width: 400px;
+    }
+
+    .obrigado-detail {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      background: var(--color-cream);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5) var(--space-6);
+      width: 100%;
+      text-align: left;
+    }
+
+    .obrigado-detail__item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .obrigado-detail__item svg {
+      color: var(--color-green);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .obrigado-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--color-border);
+      border-radius: var(--radius-full);
+    }
+  </style>
+</head>
+<body class="obrigado-page">
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner" style="position: relative; top: 0;">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo" aria-label="YouRH - voltar para a página principal">
+          <img src="assets/logo-dark.svg" alt="YouRH" height="32" />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="obrigado-main" id="main-content">
+    <div class="obrigado-card fade-in-up">
+
+      <div class="obrigado-icon" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M8 20l9 9 15-15" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <span class="obrigado-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+          <circle cx="5" cy="5" r="3" fill="currentColor"/>
+        </svg>
+        Mensagem recebida
+      </span>
+
+      <h1 class="obrigado-title">Recebemos seu contato!</h1>
+
+      <p class="obrigado-desc">
+        Um especialista YouRH vai entrar em contato em até 1 dia útil.
+      </p>
+
+      <div class="obrigado-divider" aria-hidden="true"></div>
+
+      <div class="obrigado-detail" aria-label="Próximos passos">
+        <div class="obrigado-detail__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Verifique sua caixa de entrada — você deve receber uma confirmação em breve.
+        </div>
+        <div class="obrigado-detail__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Na conversa, vamos mapear o nível de conformidade atual da sua empresa.
+        </div>
+        <div class="obrigado-detail__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Nenhum compromisso de compra. Só uma conversa direta sobre a NR-1.
+        </div>
+      </div>
+
+      <a href="index.html" class="btn btn--primary btn--lg" style="width: 100%;">
+        Voltar para a página
+      </a>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <a href="index.html" class="logo footer__logo" aria-label="YouRH">
+          <img src="assets/logo.svg" alt="YouRH" height="32" />
+        </a>
+        <nav class="footer__links" aria-label="Links do rodapé">
+          <a href="https://yourh.com.br/politica-de-privacidade" target="_blank" rel="noopener" class="footer__link">Política de privacidade</a>
+          <a href="#" class="footer__link">Termos de uso</a>
+        </nav>
+        <p class="footer__copy">&copy; 2026 YouRH by Umentor. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
