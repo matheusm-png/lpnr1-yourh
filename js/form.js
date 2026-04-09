@@ -8,8 +8,13 @@
   'use strict';
 
   // ── CONFIGURAÇÃO ────────────────────────────────────────────────
-  // INSERIR URL DO WEBHOOK RD STATION AQUI (API de Conversões)
   var RD_API_URL = 'https://api.rd.services/platform/conversions?api_key=2b4d5177951b2aaefe0b7f838559c2d9';
+
+  // Lê UTM params da URL para atribuição correta de origem no RD Station
+  function getUtmSource() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('utm_source') || params.get('utm_medium') || 'Direto';
+  }
 
   var OBRIGADO_URL = 'obrigado.html';
 
@@ -133,7 +138,7 @@
           company_name:        data.empresa,
           number_of_employees: data.funcionarios,
           job_title:           data.cargo,
-          traffic_source:      'Meta Ads',
+          traffic_source:      getUtmSource(),
         },
       }),
     });
@@ -150,10 +155,8 @@
       numero_funcionarios: data.funcionarios,
     });
 
-    // Meta Pixel: Lead event disparado aqui
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead');
-    }
+    // Meta Pixel: Lead NÃO disparado aqui — disparado no obrigado.html via PageView
+    // Isso evita duplo disparo. O obrigado.html é a fonte de verdade do evento Lead.
 
     // Evento customizado para outras integrações
     window.dispatchEvent(new CustomEvent('lead_form_submit', {

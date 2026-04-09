@@ -662,7 +662,7 @@ section {
 .cost-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-1);
+  gap: var(--space-5);
   margin-top: var(--space-12);
 }
 
@@ -856,7 +856,7 @@ section {
 .proof-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-1);
+  gap: var(--space-5);
   margin-top: var(--space-12);
 }
 
