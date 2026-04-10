@@ -16,7 +16,7 @@
     return params.get('utm_source') || params.get('utm_medium') || 'Direto';
   }
 
-  var OBRIGADO_URL = 'obrigado.html';
+  var OBRIGADO_URL = 'https://lp.yourh.com.br/obrigado.html';
 
   // ── VALIDADORES ─────────────────────────────────────────────────
   var validators = {
