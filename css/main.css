@@ -225,9 +225,8 @@ section {
   justify-content: center;
   flex-wrap: nowrap;
   gap: var(--space-4);
-  flex-wrap: wrap;
   text-align: center;
-  padding-block: var(--space-2);
+  height: 100%;
 }
 
 .urgency-bar__text {
@@ -256,22 +255,29 @@ section {
   align-items: center;
   background: rgba(255,255,255,0.15);
   border-radius: var(--radius-sm);
-  padding: 2px var(--space-2);
-  min-width: 36px;
+  padding: 3px 8px;
+  min-width: 32px;
 }
 
 .countdown-unit__value {
   font-family: var(--font-headline);
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   font-weight: var(--weight-bold);
-  line-height: 1.2;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .countdown-unit__value {
+    font-size: var(--text-md);
+  }
 }
 
 .countdown-unit__label {
-  font-size: 9px;
+  font-size: 8px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.75;
+  line-height: 1.2;
 }
 
 .countdown-separator {
@@ -371,6 +377,13 @@ section {
 
 .header__cta {
   flex-shrink: 0;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .header__cta {
+    display: block;
+  }
 }
 
 /* ============================================================
@@ -381,8 +394,15 @@ section {
   position: relative;
   background: var(--gradient-hero);
   overflow: hidden;
-  padding-top: calc(var(--space-20) + var(--urgency-height) + var(--header-height));
-  padding-bottom: var(--space-20);
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+  }
 }
 
 /* Background texture/geometric */
