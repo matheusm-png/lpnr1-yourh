@@ -110,7 +110,9 @@
 /* ── Delays escalonados ──────────────────────────────────────── */
 
 .delay-100 { transition-delay: 0.10s !important; }
+.delay-150 { transition-delay: 0.15s !important; }
 .delay-200 { transition-delay: 0.20s !important; }
+.delay-250 { transition-delay: 0.25s !important; }
 .delay-300 { transition-delay: 0.30s !important; }
 .delay-400 { transition-delay: 0.40s !important; }
 .delay-500 { transition-delay: 0.50s !important; }
