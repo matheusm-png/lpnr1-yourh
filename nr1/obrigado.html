@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Obrigado! | YouRH</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon_yourh.svg" />
+  <link rel="shortcut icon" href="assets/favicon_yourh.svg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/main.css" />
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NC7RBWD');</script>
+  <!-- Fim Google Tag Manager -->
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "w9l8cescd6");
+  </script>
+  <!-- Fim Microsoft Clarity -->
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1271719717083226');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1271719717083226&ev=Lead&noscript=1"/>
+  </noscript>
+  <!-- Fim Meta Pixel -->
+
+  <style>
+    .obrigado-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .obrigado-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-16) var(--space-5);
+      background: var(--color-cream);
+    }
+
+    .obrigado-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-12) var(--space-8);
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-5);
+    }
+
+    @media (min-width: 768px) {
+      .obrigado-card {
+        padding: var(--space-16) var(--space-12);
+      }
+    }
+
+    .obrigado-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--color-green-light);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-green);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .obrigado-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-green-light);
+      color: var(--color-green-dark);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semibold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+    }
+
+    .obrigado-title {
+      font-family: var(--font-headline);
+      font-size: var(--text-3xl);
+      font-weight: var(--weight-extrabold);
+      color: var(--color-purple);
+      line-height: var(--leading-tight);
+    }
+
+    @media (min-width: 768px) {
+      .obrigado-title {
+        font-size: var(--text-4xl);
+      }
+    }
+
+    .obrigado-desc {
+      font-size: var(--text-md);
+      color: var(--color-text-muted);
+      line-height: var(--leading-normal);
+      max-width: 400px;
+    }
+
+    .obrigado-detail {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      background: var(--color-cream);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5) var(--space-6);
+      width: 100%;
+      text-align: left;
+    }
+
+    .obrigado-detail__item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .obrigado-detail__item svg {
+      color: var(--color-green);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .obrigado-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--color-border);
+      border-radius: var(--radius-full);
+    }
+  </style>
+</head>
+<body class="obrigado-page">
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NC7RBWD"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- Fim Google Tag Manager (noscript) -->
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner" style="position: relative; top: 0; box-shadow: 0 1px 0 rgba(0,0,0,0.08);">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="logo" aria-label="YouRH - voltar para a página principal">
+          <img src="assets/logo-dark.svg" alt="YouRH" height="32" width="auto" />
+        </a>
+        <nav class="nav" aria-label="Navegação principal">
+          <a href="index.html#problemas" class="nav__link">O problema</a>
+          <a href="index.html#checklist" class="nav__link">Diagnóstico</a>
+          <a href="index.html#solucao"   class="nav__link">Solução</a>
+          <a href="index.html#faq"       class="nav__link">FAQ</a>
+        </nav>
+        <div class="header__cta">
+          <a href="index.html#form" class="btn btn--primary">Falar com especialista</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="obrigado-main" id="main-content">
+    <div class="obrigado-card fade-in-up">
+
+      <div class="obrigado-icon" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M8 20l9 9 15-15" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <span class="obrigado-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+          <circle cx="5" cy="5" r="3" fill="currentColor"/>
+        </svg>
+        Mensagem recebida
+      </span>
+
+      <h1 class="obrigado-title">Recebemos seu contato!</h1>
+
+      <p class="obrigado-desc">
+        Um especialista YouRH vai entrar em contato em até 1 dia útil.
+      </p>
+
+      <div class="obrigado-divider" aria-hidden="true"></div>
+
+      <div class="obrigado-detail" aria-label="Próximos passos">
+        <div class="obrigado-detail__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Verifique sua caixa de entrada — você deve receber uma confirmação em breve.
+        </div>
+        <div class="obrigado-detail__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Na conversa, vamos mapear o nível de conformidade atual da sua empresa.
+        </div>
+        <div class="obrigado-detail__item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Nenhum compromisso de compra. Só uma conversa direta sobre a NR-1.
+        </div>
+      </div>
+
+      <a href="index.html" class="btn btn--primary btn--lg" style="width: 100%;">
+        Voltar para a página
+      </a>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+
+      <div class="footer__main">
+
+        <div class="footer__brand">
+          <div class="footer__brand-logo">
+            <span class="footer__brand-eyebrow">Umentor agora é</span>
+            <a href="index.html" aria-label="YouRH - página inicial">
+              <img src="assets/logo.svg" alt="YouRH" height="40" width="auto" />
+            </a>
+          </div>
+          <p class="footer__tagline">Mais que um sistema de RH, um verdadeiro ecossistema para desenvolver PESSOAS!</p>
+          <div class="footer__social-box">
+            <span class="footer__social-label">Siga-nos nas redes</span>
+            <div class="footer__social-links">
+              <a href="https://www.instagram.com/yourhoficial" target="_blank" rel="noopener" aria-label="Instagram YouRH" class="footer__social-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/company/yourhoficial/" target="_blank" rel="noopener" aria-label="LinkedIn YouRH" class="footer__social-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="https://www.youtube.com/@yourhoficial" target="_blank" rel="noopener" aria-label="YouTube YouRH" class="footer__social-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--color-purple-dark)"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__info">
+          <div class="footer__addresses">
+            <div class="footer__address">
+              <strong>Passo Fundo – RS</strong>
+              <span>Av. Brasil Oeste, 560 – 2401 – Centro</span>
+              <span>Passo Fundo/RS — CEP: 99010-001</span>
+            </div>
+            <div class="footer__address">
+              <strong>Balneário Camboriú – SC</strong>
+              <span>Rua 700, 489 – 1104 – Centro</span>
+              <span>Balneário Camboriú/SC — CEP: 88330-620</span>
+            </div>
+          </div>
+          <a href="https://painel.umentor.com.br/inteligente_novos/?con_cod=ana12479&pla=5" target="_blank" rel="noopener" class="footer__jobs-btn">
+            trabalhe na yourh
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">YOURH DESENVOLVIMENTO E TREINAMENTO LTDA – 29.067.310/0001-05</p>
+        <a href="https://yourh.com.br/politica-de-privacidade" target="_blank" rel="noopener" class="footer__link">Política de privacidade</a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
