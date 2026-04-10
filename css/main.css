@@ -1904,52 +1904,170 @@ section {
    FOOTER
    ============================================================ */
 
+/* ── Footer ──────────────────────────────────────────────────── */
+
 .site-footer {
   background: var(--color-purple-dark);
   color: rgba(255,255,255,0.65);
-  padding-block: var(--space-12);
+  padding-block: var(--space-16) var(--space-8);
 }
 
-.footer__inner {
+.footer__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  padding-bottom: var(--space-10);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+@media (min-width: 768px) {
+  .footer__main {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Marca */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.footer__brand-logo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.footer__brand-eyebrow {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.50);
+  letter-spacing: 0.04em;
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.60);
+  line-height: var(--leading-normal);
+  max-width: 300px;
+}
+
+/* Caixa social */
+.footer__social-box {
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 260px;
+}
+
+.footer__social-label {
+  font-size: var(--text-sm);
+  color: var(--color-green);
+  font-weight: var(--weight-semibold);
+}
+
+.footer__social-links {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.footer__social-icon {
+  color: rgba(255,255,255,0.75);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: flex;
+  align-items: center;
+}
+
+.footer__social-icon:hover {
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* Endereços + trabalhe */
+.footer__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.footer__addresses {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.footer__address {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: rgba(255,255,255,0.60);
+  line-height: var(--leading-normal);
+}
+
+.footer__address strong {
+  color: var(--color-white);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+}
+
+.footer__jobs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255,255,255,0.80);
+  border-radius: var(--radius-full);
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+  width: fit-content;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.footer__jobs-btn:hover {
+  background: var(--color-white);
+  color: var(--color-purple-dark);
+}
+
+/* Barra inferior */
+.footer__bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-3);
+  padding-top: var(--space-6);
   text-align: center;
 }
 
 @media (min-width: 768px) {
-  .footer__inner {
+  .footer__bottom {
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
   }
 }
 
-.footer__logo .logo__wordmark {
-  color: var(--color-white);
-}
-
-.footer__links {
-  display: flex;
-  gap: var(--space-6);
-  flex-wrap: wrap;
-  justify-content: center;
+.footer__copy {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.02em;
 }
 
 .footer__link {
-  font-size: var(--text-sm);
-  color: rgba(255,255,255,0.55);
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.45);
   transition: color var(--transition-fast);
 }
 
 .footer__link:hover {
   color: var(--color-green);
-}
-
-.footer__copy {
-  font-size: var(--text-xs);
-  color: rgba(255,255,255,0.40);
 }
 
 /* ============================================================
